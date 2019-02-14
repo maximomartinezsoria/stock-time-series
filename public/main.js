@@ -24,7 +24,7 @@ function chart(data) {
     for(let series in data) {
         if(data.hasOwnProperty(series)){
             ohlc.push([
-                parseFloat(series), // the date
+                series, // the date
                 parseFloat(data[series]["1. open"]), // open
                 parseFloat(data[series]["2. high"]), // high
                 parseFloat(data[series]["3. low"]), // low
@@ -32,7 +32,7 @@ function chart(data) {
             ]);
 
             volume.push([
-                parseFloat(series), // the date
+                series, // the date
                 parseFloat(data[series]["5. volume"]) // the volume
             ]);
         }
