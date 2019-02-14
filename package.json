@@ -1,0 +1,12 @@
+{
+  "name": "Stock time series",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Maximo Martinez Soria",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "node-cache": "^4.2.0",
+    "node-fetch": "^2.3.0"
+  }
+}
