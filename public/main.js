@@ -10,31 +10,45 @@ function request(){
     .then(data => {
         var data = data.data["Time Series (5min)"];
         console.log(data);
-        chart(data);
+
+        var dataKeys = Object.keys(data);
+        var dates = []
+
+        for(let i = 0; i < dataKeys.length; i++){
+            var lastElement = dataKeys.pop();
+            dates.push(lastElement);
+        }
+
+        chart(data, dates);
     })
     .catch(err => console.log('the error: ' + err));
 }
 
 
-function chart(data) {
+function chart(data, dates) {
     // split the data set into ohlc and volume
     var ohlc = [],
         volume = []
+        
+    var i = 0; 
     
     for(let series in data) {
         if(data.hasOwnProperty(series)){
+            console.log(dates[i]);
             ohlc.push([
-                series, // the date
+                dates[i], // the date
                 parseFloat(data[series]["1. open"]), // open
                 parseFloat(data[series]["2. high"]), // high
                 parseFloat(data[series]["3. low"]), // low
                 parseFloat(data[series]["4. close"]) // close
             ]);
-
+            
             volume.push([
-                series, // the date
+                dates[i], // the date
                 parseFloat(data[series]["5. volume"]) // the volume
             ]);
+
+            i++
         }
     }
 
@@ -89,13 +103,13 @@ function chart(data) {
         },
         series: [{
             type: 'ohlc',
-            id: 'aapl-ohlc',
-            name: 'AAPL Stock Price',
+            id: 'price',
+            name: 'Price',
             data: ohlc
         }, {
             type: 'column',
-            id: 'aapl-volume',
-            name: 'AAPL Volume',
+            id: 'volume',
+            name: 'Volume',
             data: volume,
             yAxis: 1
         }],
@@ -108,7 +122,7 @@ function chart(data) {
                     rangeSelector: {
                         inputEnabled: false
                     }
-                }
+                 }
             }]
         }
     });
