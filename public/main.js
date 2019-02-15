@@ -4,6 +4,7 @@
 request();
 setInterval(request, 5 * 1000 * 60);
 
+// The request
 function request(){
     fetch('http://localhost:3000/data')
     .then(data => data.json()) 
@@ -11,6 +12,7 @@ function request(){
         var data = data.data["Time Series (5min)"];
         console.log(data);
 
+        // Reverse the dates
         var dataKeys = Object.keys(data);
         var dates = []
 
@@ -19,7 +21,7 @@ function request(){
             dates.push(lastElement);
         }
 
-        chart(data, dates);
+        chart(data, dates); // This function display the chart
     })
     .catch(err => console.log('the error: ' + err));
 }
@@ -34,7 +36,7 @@ function chart(data, dates) {
     
     for(let series in data) {
         if(data.hasOwnProperty(series)){
-            console.log(dates[i]);
+            if(dates[i] == undefined){break;}
             ohlc.push([
                 dates[i], // the date
                 parseFloat(data[series]["1. open"]), // open

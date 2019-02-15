@@ -28,7 +28,7 @@ const server = app.listen(3000, () => {
             // caching the request
             cache.get(1, () => {
                 var apiKey = 'ITKORAERP00Y0RL6';
-                var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=' + apiKey;
+                var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&outputsize=full&apikey=' + apiKey;
                 
                 // Doing the request to alphavantage API
                     console.log('DOING THE REQUEST');
